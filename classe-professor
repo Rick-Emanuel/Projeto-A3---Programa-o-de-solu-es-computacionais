@@ -16,7 +16,7 @@ class Professor {
     }
 }
 
-public class professor {
+public class Professor {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         Professor professor = new Professor("professor@email.com", "123456");
@@ -31,10 +31,7 @@ public class professor {
             System.out.print("Digite a senha: ");
             senhaDigitada = sc.nextLine();
 
-            if (!professor.validarLogin(emailDigitado, senhaDigitada)) {
-                System.out.println("Email ou senha incorretos. Tente novamente.");
-            }
-
+            
         } while (!professor.validarLogin(emailDigitado, senhaDigitada));
 
         System.out.println("Login realizado com sucesso!");
