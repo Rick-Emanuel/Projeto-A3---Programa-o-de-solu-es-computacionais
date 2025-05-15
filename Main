@@ -1,0 +1,90 @@
+package CadastroEmJava;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Main {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    ArrayList<CadastroDeEstudante> estudantes = new ArrayList<>();
+
+    String resposta;
+
+    do {
+      int ra;
+     do{
+      System.out.println("Digite o RA:");
+      ra = scanner.nextInt();
+      scanner.nextLine();
+      if (ra < 0 || ra > 100) {
+        System.out.println("O Ra tem que ser maior que 0 e menor que 100");
+      }
+      } while (ra <= 0 || ra >= 100);
+      
+        String nome;
+      do { System.out.println("Digite  o nome completo:");
+      nome = scanner.nextLine();
+      if (nome.length()<=5) {
+        System.out.println("O nome deve ter mais que 4 letras");
+      }
+      } while(nome.length()<=5);
+      
+      String curso;
+      do{
+      System.out.println("Digite o curso:");
+      curso = scanner.nextLine();
+      if (curso.length()<=2) {
+        System.out.println("O nome do curso deve ter mais que 2 letras");
+      }
+      } while(curso.length()<=2);
+      
+      
+      String turno;
+do {
+    System.out.println("Digite o turno:");
+    turno = scanner.nextLine();
+
+    if (!turno.equals("Noturno") && !turno.equals("Matutino") && !turno.equals("Vespertino")) {
+        System.out.println("Os turnos disponíveis são: Matutino | Vespertino | Noturno.");
+    }
+} while (!turno.equals("Noturno") && !turno.equals("Matutino") && !turno.equals("Vespertino"));
+      
+      
+      
+
+      System.out.println("Digite o e-mail:");
+      String email = scanner.nextLine();
+
+      System.out.println("Digite o telefone:");
+      int telefone = scanner.nextInt();
+      scanner.nextLine();
+
+      
+      CadastroDeEstudante estudante = new CadastroDeEstudante(ra, nome, curso, turno, email, telefone);
+      estudantes.add(estudante);
+
+
+      System.out.println("Deseja cadastrar outro estudante? (sim/não)");
+      resposta = scanner.nextLine().toLowerCase();
+
+    } while (resposta.equals("sim"));
+
+    System.out.println("Deseja ver os estudantes cadastrados? (sim/não)");
+    String verEstudantes = scanner.nextLine().toLowerCase();
+
+    if (verEstudantes.equals("sim")) {
+      System.out.println("\n--- Estudantes Cadastrados ---");
+      for (CadastroDeEstudante est : estudantes) {
+        System.out.println("RA: " + est.getRa());
+        System.out.println("Nome: " + est.getNomeCompleto());
+        System.out.println("Curso: " + est.getCurso());
+        System.out.println("Turno: " + est.getTurno());
+        System.out.println("Email: " + est.getEmail());
+        System.out.println("Telefone: " + est.getTelefone());
+        System.out.println("-----------------------------");
+      }
+    }
+
+    
+  }
+}
