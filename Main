@@ -1,14 +1,40 @@
+
 import java.util.ArrayList;
 import java.util.Scanner;
+import src.*;
 
-public class Main {
+public class main {
   public static void main(String[] args) {
     Scanner scanner = new Scanner(System.in);
+
+    Professor professor = new Professor("professor@email.com", "123456");
+        String emailDigitado;
+        String senhaDigitada;
+
+        System.out.println("--- Login do Professor ---");
+
+        do {
+            System.out.print("Digite o email: ");
+            emailDigitado = scanner.nextLine();
+
+            System.out.print("Digite a senha: ");
+            senhaDigitada = scanner.nextLine();
+
+            if (!professor.validarLogin(emailDigitado, senhaDigitada)) {
+                System.out.println("Email ou senha incorretos. Tente novamente.");
+            }
+
+        } while (!professor.validarLogin(emailDigitado, senhaDigitada));
+
+        System.out.println("Login realizado com sucesso!");
+
+
     ArrayList<CadastroDeEstudante> estudantes = new ArrayList<>();
 
     String resposta;
 
     do {
+     
       int ra;
      do{
       System.out.println("Digite o RA:");
@@ -71,7 +97,7 @@ do {
     String verEstudantes = scanner.nextLine().toLowerCase();
 
     if (verEstudantes.equals("sim")) {
-      System.out.println("\n--- Estudantes Cadastrados ---");
+      System.out.println("--- Estudantes Cadastrados ---");
       for (CadastroDeEstudante est : estudantes) {
         System.out.println("RA: " + est.getRa());
         System.out.println("Nome: " + est.getNomeCompleto());
@@ -82,6 +108,26 @@ do {
         System.out.println("-----------------------------");
       }
     }
+      System.out.println("Deseja registrar presença dos estudantes? (sim/não)");
+String registrarPresenca = scanner.nextLine().toLowerCase();
+
+ArrayList<Presenca> listaPresenca = new ArrayList<>();
+
+if (registrarPresenca.equals("sim")) {
+  for (CadastroDeEstudante est : estudantes) {
+    System.out.println("O aluno " + est.getNomeCompleto() + " está presente? (sim/não)");
+    String respostaPresenca = scanner.nextLine().toLowerCase();
+    boolean presente = respostaPresenca.equals("sim");
+    listaPresenca.add(new Presenca(est.getRa(), est.getNomeCompleto(), presente));
+  }
+
+  System.out.println("--- Lista de Presença ---");
+  for (Presenca p : listaPresenca) {
+    String status = p.isPresente() ? "Presente" : "Ausente";
+    System.out.println("Nome: " + p.getNomeCompleto() + " | RA: " + p.getRa() + " | Status: " + status);
+
+  }
+}
 
     
   }
