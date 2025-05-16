@@ -1,8 +1,6 @@
-package com.mycompany.helloworld;
+package src;
 
-import java.util.Scanner;
-
-class Professor {
+public class Professor {
     private String emailCorreto;
     private String senhaCorreta;
 
@@ -13,28 +11,5 @@ class Professor {
 
     public boolean validarLogin(String email, String senha) {
         return emailCorreto.equals(email) && senhaCorreta.equals(senha);
-    }
-}
-
-public class Professor {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        Professor professor = new Professor("professor@email.com", "123456");
-
-        String emailDigitado;
-        String senhaDigitada;
-
-        do {
-            System.out.print("Digite o email: ");
-            emailDigitado = sc.nextLine();
-
-            System.out.print("Digite a senha: ");
-            senhaDigitada = sc.nextLine();
-
-            
-        } while (!professor.validarLogin(emailDigitado, senhaDigitada));
-
-        System.out.println("Login realizado com sucesso!");
-        sc.close();
     }
 }
