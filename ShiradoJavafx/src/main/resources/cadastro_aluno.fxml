@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox fx:id="root" spacing="20" stylesheets="@cadastro_aluno.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shiradojavafx.ControllerCadastro">
+    <padding>
+        <Insets bottom="20" left="30" right="30" top="20" />
+    </padding>
+
+    <!-- Título principal -->
+    <Label styleClass="label-title" text="Cadastrar Aluno" />
+
+    <!-- Caixa de cadastro -->
+    <GridPane hgap="15" styleClass="cadastro-box" vgap="15">
+        <columnConstraints>
+            <ColumnConstraints percentWidth="50" />
+            <ColumnConstraints percentWidth="50" />
+        </columnConstraints>
+
+        <Label styleClass="label-section" text="Nome :" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+        <TextField fx:id="nomeField" styleClass="text-field" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+        <Label styleClass="label-section" text="E-mail :" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+        <TextField fx:id="emailField" styleClass="text-field" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+        <Label styleClass="label-section" text="Telefone:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+        <TextField fx:id="telefoneField" styleClass="text-field" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+        <Label styleClass="label-section" text="RA :" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+        <TextField fx:id="raField" styleClass="text-field" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+
+        <Label styleClass="label-section" text="Curso :" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+        <TextField fx:id="cursoField" styleClass="text-field" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+
+        <Label styleClass="label-section" text="Turno :" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+        <TextField fx:id="turnoField" styleClass="text-field" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+
+        <Button fx:id="enviarButton" alignment="CENTER" onAction="#handleEnviar" styleClass="button-enviar" text="Enviar" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+      <rowConstraints>
+         <RowConstraints />
+         <RowConstraints />
+         <RowConstraints />
+         <RowConstraints />
+         <RowConstraints />
+         <RowConstraints />
+         <RowConstraints />
+      </rowConstraints>
+    </GridPane>
+
+    <!-- Lista de alunos cadastrados -->
+    <Label styleClass="label-lista" text="Alunos Cadastrados :" />
+    <TableView fx:id="alunoTable" prefHeight="300" styleClass="table-view">
+        <columns>
+            <TableColumn fx:id="colNome" prefWidth="200" text="Nome" />
+            <TableColumn fx:id="colEmail" prefWidth="200" text="E-mail" />
+            <TableColumn fx:id="colRA" prefWidth="100" text="RA" />
+            <TableColumn fx:id="colCurso" prefWidth="150" text="Curso" />
+            <TableColumn fx:id="colTurno" prefWidth="100" text="Turno" />
+        </columns>
+    </TableView>
+</VBox>
