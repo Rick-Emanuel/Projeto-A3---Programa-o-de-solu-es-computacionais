@@ -10,6 +10,8 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        Database.initialize();
+
         Parent root = FXMLLoader.load(getClass().getResource("/login.fxml"));
         primaryStage.setTitle("Sistema de Cadastro - Login");
         primaryStage.setScene(new Scene(root, 800, 600));

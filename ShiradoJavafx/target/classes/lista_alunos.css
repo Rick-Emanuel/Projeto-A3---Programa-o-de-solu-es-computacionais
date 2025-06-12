@@ -1,0 +1,37 @@
+TableView {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #cbd5e0;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-padding: 2px;
+}
+
+/* Cabeçalho da tabela */
+.table-column {
+    -fx-alignment: CENTER;
+}
+
+.table-view .column-header {
+    -fx-background-color: #4299e1; /* Cor do cabeçalho */
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-size: 14px;
+}
+
+/* Células da tabela */
+.table-row-cell {
+    -fx-cell-size: 40px;
+    -fx-border-color: transparent transparent #e2e8f0 transparent;
+}
+
+.table-cell {
+    -fx-alignment: CENTER;
+    -fx-padding: 0 10px;
+    -fx-font-size: 14px;
+}
+
+/* Linha selecionada */
+.table-row-cell:selected {
+    -fx-background-color: #ebf8ff;
+    -fx-text-fill: #2b6cb0;
+}

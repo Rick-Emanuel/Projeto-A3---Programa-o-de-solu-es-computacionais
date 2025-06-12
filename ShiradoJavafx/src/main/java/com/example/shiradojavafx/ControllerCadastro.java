@@ -7,16 +7,19 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class ControllerCadastro implements Initializable {
+
     @FXML private TextField nomeField;
     @FXML private TextField emailField;
     @FXML private TextField telefoneField;
     @FXML private TextField raField;
-    @FXML private TextField cursoField;
-    @FXML private TextField turnoField;
+    @FXML private SplitMenuButton cursoSplitMenuButton;
+    @FXML private SplitMenuButton turnoSplitMenuButton;
     @FXML private Button enviarButton;
     @FXML private TableView<CadastroDeEstudante> alunoTable;
     @FXML private TableColumn<CadastroDeEstudante, String> colNome;
@@ -30,20 +33,45 @@ public class ControllerCadastro implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        colNome.setCellValueFactory(new PropertyValueFactory<>("nomeCompleto"));
-        colEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
-        colRA.setCellValueFactory(new PropertyValueFactory<>("ra"));
-        colCurso.setCellValueFactory(new PropertyValueFactory<>("curso"));
-        colTurno.setCellValueFactory(new PropertyValueFactory<>("turno"));
+        cursoSplitMenuButton.getItems().clear();
+        String[] cursos = {
+                "Administração",
+                "Analise e Desenvolvimento de Sistemas",
+                "Engenharia",
+                "Direito",
+                "Medicina"
+        };
+        for (String curso : cursos) {
+            MenuItem item = new MenuItem(curso);
+            item.setOnAction(e -> cursoSplitMenuButton.setText(curso));
+            cursoSplitMenuButton.getItems().add(item);
+        }
 
-        alunoTable.setItems(estudantes);
+        turnoSplitMenuButton.getItems().clear();
+        String[] turnos = {"Matutino", "Vespertino", "Noturno"};
+        for (String turno : turnos) {
+            MenuItem item = new MenuItem(turno);
+            item.setOnAction(e -> turnoSplitMenuButton.setText(turno));
+            turnoSplitMenuButton.getItems().add(item);
+        }
+
+        cursoSplitMenuButton.setText("Selecione o Curso");
+        turnoSplitMenuButton.setText("Selecione o Turno");
+
+        if (colNome != null) colNome.setCellValueFactory(new PropertyValueFactory<>("nomeCompleto"));
+        if (colEmail != null) colEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
+        if (colRA != null) colRA.setCellValueFactory(new PropertyValueFactory<>("ra"));
+        if (colCurso != null) colCurso.setCellValueFactory(new PropertyValueFactory<>("curso"));
+        if (colTurno != null) colTurno.setCellValueFactory(new PropertyValueFactory<>("turno"));
+
+        if (alunoTable != null) alunoTable.setItems(estudantes);
     }
 
     @FXML
     void handleEnviar(ActionEvent event) {
         try {
-
-            if (nomeField.getText().trim().length() <= 5) {
+            String nome = nomeField.getText().trim();
+            if (nome.length() <= 5) {
                 showAlert("Erro", "O nome deve ter mais que 5 caracteres");
                 return;
             }
@@ -54,30 +82,40 @@ public class ControllerCadastro implements Initializable {
                 return;
             }
 
-            if (cursoField.getText().trim().length() <= 2) {
-                showAlert("Erro", "O nome do curso deve ter mais que 2 caracteres");
+            String curso = cursoSplitMenuButton.getText();
+            if (curso.equals("Selecione o Curso")) {
+                showAlert("Erro", "Por favor, selecione um curso válido");
                 return;
             }
 
-            String turno = turnoField.getText().trim();
-            if (!turno.equals("Matutino") && !turno.equals("Vespertino") && !turno.equals("Noturno")) {
-                showAlert("Erro", "Os turnos disponíveis são: Matutino, Vespertino ou Noturno");
+            String turno = turnoSplitMenuButton.getText();
+            if (turno.equals("Selecione o Turno")) {
+                showAlert("Erro", "Por favor, selecione um turno válido");
                 return;
             }
 
+            String email = emailField.getText().trim();
+            int telefone = Integer.parseInt(telefoneField.getText());
 
             CadastroDeEstudante novoEstudante = new CadastroDeEstudante(
                     ra,
-                    nomeField.getText().trim(),
-                    cursoField.getText().trim(),
+                    nome,
+                    curso,
                     turno,
-                    emailField.getText().trim(),
-                    Integer.parseInt(telefoneField.getText())
+                    email,
+                    telefone
             );
 
-            estudantes.add(novoEstudante);
-            limparCampos();
-            showAlert("Sucesso", "Estudante cadastrado com sucesso!");
+            try {
+                AlunoDAO.inserirAluno(novoEstudante);
+                estudantes.add(novoEstudante);
+                limparCampos();
+                showAlert("Sucesso", "Estudante cadastrado com sucesso!");
+            } catch (SQLException e) {
+                showAlert("Erro", "Falha ao salvar no banco de dados: " + e.getMessage());
+                e.printStackTrace();
+            }
+
 
         } catch (NumberFormatException e) {
             showAlert("Erro", "RA e Telefone devem ser números válidos");
@@ -89,8 +127,8 @@ public class ControllerCadastro implements Initializable {
         emailField.clear();
         telefoneField.clear();
         raField.clear();
-        cursoField.clear();
-        turnoField.clear();
+        cursoSplitMenuButton.setText("Selecione o Curso");
+        turnoSplitMenuButton.setText("Selecione o Turno");
     }
 
     private void showAlert(String title, String message) {

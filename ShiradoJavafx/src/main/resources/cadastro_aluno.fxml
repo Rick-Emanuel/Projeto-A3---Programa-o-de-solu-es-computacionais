@@ -1,70 +1,103 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitMenuButton?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<VBox fx:id="root" spacing="20" stylesheets="@cadastro_aluno.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shiradojavafx.ControllerCadastro">
-    <padding>
-        <Insets bottom="20" left="30" right="30" top="20" />
-    </padding>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="482.0" prefWidth="860.0" stylesheets="@cadastro_alunos.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shiradojavafx.ControllerCadastro">
+    <children>
+        <fx:include source="sidebar.fxml" />
 
-    <!-- Título principal -->
-    <Label styleClass="label-title" text="Cadastrar Aluno" />
+        <Label layoutX="200.0" layoutY="37.0" prefHeight="43.0" prefWidth="232.0" text="Cadastrar Alunos">
+            <font>
+                <Font size="24.0" />
+            </font>
+        </Label>
 
-    <!-- Caixa de cadastro -->
-    <GridPane hgap="15" styleClass="cadastro-box" vgap="15">
-        <columnConstraints>
-            <ColumnConstraints percentWidth="50" />
-            <ColumnConstraints percentWidth="50" />
-        </columnConstraints>
+        <GridPane layoutX="217.0" layoutY="104.0" prefHeight="285.0" prefWidth="472.0" AnchorPane.bottomAnchor="54.4" AnchorPane.leftAnchor="217.0" AnchorPane.rightAnchor="135.0" AnchorPane.topAnchor="104.0">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="304.0" minWidth="10.0" prefWidth="126.4" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="345.6" minWidth="10.0" prefWidth="345.6" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints maxHeight="76.8" minHeight="10.0" prefHeight="41.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="94.6" minHeight="10.0" prefHeight="45.6" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="89.4" minHeight="10.0" prefHeight="51.2" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="89.4" minHeight="10.0" prefHeight="51.2" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="89.4" minHeight="10.0" prefHeight="51.2" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="89.4" minHeight="10.0" prefHeight="51.2" vgrow="SOMETIMES" />
+            </rowConstraints>
 
-        <Label styleClass="label-section" text="Nome :" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-        <TextField fx:id="nomeField" styleClass="text-field" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+            <children>
 
-        <Label styleClass="label-section" text="E-mail :" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-        <TextField fx:id="emailField" styleClass="text-field" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <Label prefHeight="28.0" prefWidth="73.0" text="Nome:" GridPane.rowIndex="0">
+                    <font>
+                        <Font size="19.0" />
+                    </font>
+                </Label>
 
-        <Label styleClass="label-section" text="Telefone:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-        <TextField fx:id="telefoneField" styleClass="text-field" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <Label prefHeight="28.0" prefWidth="80.0" text="E-mail:" GridPane.rowIndex="1">
+                    <font>
+                        <Font size="19.0" />
+                    </font>
+                </Label>
 
-        <Label styleClass="label-section" text="RA :" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-        <TextField fx:id="raField" styleClass="text-field" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                <Label prefHeight="27.0" prefWidth="118.0" text="Telefone:" GridPane.rowIndex="2">
+                    <font>
+                        <Font size="19.0" />
+                    </font>
+                </Label>
 
-        <Label styleClass="label-section" text="Curso :" GridPane.columnIndex="0" GridPane.rowIndex="4" />
-        <TextField fx:id="cursoField" styleClass="text-field" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                <Label prefHeight="18.0" prefWidth="74.0" text="RA:" GridPane.rowIndex="3">
+                    <font>
+                        <Font size="19.0" />
+                    </font>
+                </Label>
 
-        <Label styleClass="label-section" text="Turno :" GridPane.columnIndex="0" GridPane.rowIndex="5" />
-        <TextField fx:id="turnoField" styleClass="text-field" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                <Label prefHeight="18.0" prefWidth="90.0" text="Curso:" GridPane.rowIndex="4">
+                    <font>
+                        <Font size="19.0" />
+                    </font>
+                </Label>
 
-        <Button fx:id="enviarButton" alignment="CENTER" onAction="#handleEnviar" styleClass="button-enviar" text="Enviar" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-      <rowConstraints>
-         <RowConstraints />
-         <RowConstraints />
-         <RowConstraints />
-         <RowConstraints />
-         <RowConstraints />
-         <RowConstraints />
-         <RowConstraints />
-      </rowConstraints>
-    </GridPane>
+                <Label prefHeight="18.0" prefWidth="71.0" text="Turno:" GridPane.rowIndex="5">
+                    <font>
+                        <Font size="19.0" />
+                    </font>
+                </Label>
 
-    <!-- Lista de alunos cadastrados -->
-    <Label styleClass="label-lista" text="Alunos Cadastrados :" />
-    <TableView fx:id="alunoTable" prefHeight="300" styleClass="table-view">
-        <columns>
-            <TableColumn fx:id="colNome" prefWidth="200" text="Nome" />
-            <TableColumn fx:id="colEmail" prefWidth="200" text="E-mail" />
-            <TableColumn fx:id="colRA" prefWidth="100" text="RA" />
-            <TableColumn fx:id="colCurso" prefWidth="150" text="Curso" />
-            <TableColumn fx:id="colTurno" prefWidth="100" text="Turno" />
-        </columns>
-    </TableView>
-</VBox>
+                <TextField fx:id="nomeField" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                <TextField fx:id="emailField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <TextField fx:id="telefoneField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <TextField fx:id="raField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+
+                <SplitMenuButton fx:id="cursoSplitMenuButton" prefHeight="26.0" prefWidth="342.0" text="Selecione o Curso" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                    <items>
+                        <MenuItem text="Administração" />
+                        <MenuItem text="Analise e Desenvolvimento de Sistemas" />
+                        <MenuItem text="Engenharia" />
+                        <MenuItem text="Direito" />
+                        <MenuItem text="Medicina" />
+                    </items>
+                </SplitMenuButton>
+
+                <SplitMenuButton fx:id="turnoSplitMenuButton" prefHeight="26.0" prefWidth="343.0" text="Selecione o Turno" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                    <items>
+                        <MenuItem text="Matutino" />
+                        <MenuItem text="Vespertino" />
+                        <MenuItem text="Noturno" />
+                    </items>
+                </SplitMenuButton>
+            </children>
+        </GridPane>
+
+        <Button fx:id="enviarButton" layoutX="471.0" layoutY="428.0" mnemonicParsing="false" onAction="#handleEnviar" prefHeight="26.0" prefWidth="154.0" text="Salvar" />
+    </children>
+</AnchorPane>

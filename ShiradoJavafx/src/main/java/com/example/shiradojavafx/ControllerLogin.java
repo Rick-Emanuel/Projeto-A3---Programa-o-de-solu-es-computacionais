@@ -27,11 +27,11 @@ public class ControllerLogin {
 
         if (professor.validarLogin(email, senha)) {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/cadastro_aluno.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/presenca.fxml"));
                 Parent root = loader.load();
                 Stage stage = (Stage) emailField.getScene().getWindow();
-                stage.setScene(new Scene(root));
-                stage.setTitle("Sistema de Cadastro - Cadastrar Alunos");
+                stage.setScene(new Scene(root, 1000, 700));
+                stage.setTitle("Sistema de Cadastro");
             } catch (IOException e) {
                 e.printStackTrace();
             }

@@ -17,7 +17,7 @@ public class CadastroDeEstudante {
         this.telefone = telefone;
     }
 
-    // Getters e Setters
+
     public int getRa() {
         return ra;
     }
@@ -57,6 +57,7 @@ public class CadastroDeEstudante {
     public void setEmail(String email) {
         this.email = email;
     }
+
 
     public int getTelefone() {
         return telefone;

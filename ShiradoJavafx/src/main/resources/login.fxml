@@ -2,7 +2,6 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
@@ -12,7 +11,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane fx:id="root" stylesheets="@login.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="com.example.shiradojavafx.ControllerLogin">
+<BorderPane fx:id="root" stylesheets="@login.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shiradojavafx.ControllerLogin">
     <left>
         <VBox fx:id="loginPane" alignment="CENTER_LEFT" spacing="15.0" BorderPane.alignment="CENTER">
             <padding>
@@ -23,10 +22,9 @@
             <TextField fx:id="emailField" promptText="E-mail" />
             <PasswordField fx:id="senhaField" promptText="Senha" styleClass="password-field" />
             <HBox spacing="10">
-                <CheckBox text="Lembrar" />
                 <Hyperlink text="Recuperar senha" />
             </HBox>
-            <Button alignment="CENTER" onAction="#handleLogin" styleClass="button-login" text="Login" />
+            <Button alignment="CENTER" onAction="#handleLogin" prefHeight="36.0" prefWidth="195.0" styleClass="button-login" text="Login" />
         </VBox>
     </left>
     <right>
