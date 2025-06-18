@@ -1,3 +1,4 @@
+
 package com.example.shiradojavafx;
 
 import java.time.LocalDate;
@@ -5,15 +6,21 @@ import java.time.LocalDate;
 public class Presenca {
     private int ra;
     private String nomeCompleto;
+    private String curso;
+    private String turno;
     private LocalDate data;
     private boolean presente;
 
-    public Presenca(int ra, String nomeCompleto, LocalDate data, boolean presente) {
+    public Presenca(int ra, String nomeCompleto, String curso, String turno,
+                    LocalDate data, boolean presente) {
         this.ra = ra;
         this.nomeCompleto = nomeCompleto;
+        this.curso = curso;
+        this.turno = turno;
         this.data = data;
         this.presente = presente;
     }
+
 
     public int getRa() {
         return ra;
@@ -29,6 +36,22 @@ public class Presenca {
 
     public void setNomeCompleto(String nomeCompleto) {
         this.nomeCompleto = nomeCompleto;
+    }
+
+    public String getCurso() {
+        return curso;
+    }
+
+    public void setCurso(String curso) {
+        this.curso = curso;
+    }
+
+    public String getTurno() {
+        return turno;
+    }
+
+    public void setTurno(String turno) {
+        this.turno = turno;
     }
 
     public LocalDate getData() {

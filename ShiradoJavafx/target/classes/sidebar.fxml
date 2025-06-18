@@ -10,15 +10,8 @@
     </padding>
     <children>
         <Button mnemonicParsing="false" onAction="#switchToPresenca" prefHeight="26.0" prefWidth="139.0" text="Presença" />
-        <Button mnemonicParsing="false" onAction="#switchToCadastro" prefHeight="26.0" prefWidth="140.0" text="Cadastrar Aluno">
-            <VBox.margin>
-                <Insets top="20.0" />
-            </VBox.margin>
-        </Button>
-        <Button mnemonicParsing="false" onAction="#switchToLista" prefHeight="26.0" prefWidth="149.0" text="Alunos Cadastrados">
-            <VBox.margin>
-                <Insets top="30.0" />
-            </VBox.margin>
-        </Button>
+        <Button mnemonicParsing="false" onAction="#switchToCadastro" prefHeight="26.0" prefWidth="140.0" text="Cadastrar Aluno" />
+        <Button mnemonicParsing="false" onAction="#switchToLista" prefHeight="26.0" prefWidth="149.0" text="Alunos Cadastrados" />
+        <Button text="Lista de Presenças" onAction="#switchToPresencaList" />
     </children>
 </VBox>

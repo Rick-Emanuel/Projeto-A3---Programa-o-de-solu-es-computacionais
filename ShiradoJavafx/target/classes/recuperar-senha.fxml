@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane fx:id="root" maxHeight="720.0" maxWidth="1080.0" minHeight="720.0" minWidth="1080.0" prefHeight="720.0" prefWidth="1080.0" stylesheets="@login.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shiradojavafx.ControllerRecuperarSenha">
+    <VBox fx:id="recuperarPane" alignment="CENTER" layoutY="51.2" prefHeight="618.0" prefWidth="566.0" spacing="15.0" AnchorPane.bottomAnchor="51.0" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="454.0" AnchorPane.topAnchor="51.0">
+        <Label styleClass="label-title" text="Recuperar senha." />
+        <Separator maxWidth="400.0" prefWidth="400.0" />
+        <Label prefHeight="30.0" prefWidth="400.0" styleClass="centered-label" text="Digite seu email para receber as instruções de recuperação:" wrapText="true" />
+        <TextField fx:id="emailField" maxWidth="400.0" prefHeight="36.0" prefWidth="400.0" promptText="Digite seu e-mail" />
+        <Button maxWidth="400.0" onAction="#handleRecuperar" prefHeight="36.0" prefWidth="400.0" styleClass="button-login" text="Enviar" />
+        <Label fx:id="separadorLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="15.0" prefWidth="400.0" styleClass="centered-label" text="Ou" />
+        <Button maxWidth="400.0" onAction="#handleVoltarLogin" prefHeight="36.0" prefWidth="400.0" styleClass="button-secondary" text="Voltar ao Login" />
+    </VBox>
+
+    <VBox fx:id="sideInfoPane" alignment="CENTER" prefHeight="720.0" prefWidth="430.0" spacing="20" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <padding>
+            <Insets bottom="20" left="20" right="20" top="20" />
+        </padding>
+        <Label fx:id="sideInfoTitle" styleClass="centered-label" text="Esqueceu sua senha?" />
+        <Label fx:id="sideInfoText" styleClass="centered-label" wrapText="true">
+            <text>
+                Não se preocupe! Digite seu email e enviaremos as instruções para redefinir sua senha.
+            </text>
+        </Label>
+    </VBox>
+</AnchorPane>

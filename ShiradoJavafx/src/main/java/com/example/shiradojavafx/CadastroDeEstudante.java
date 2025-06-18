@@ -6,9 +6,14 @@ public class CadastroDeEstudante {
     private String curso;
     private String turno;
     private String email;
-    private int telefone;
+    private String telefone;
 
-    public CadastroDeEstudante(int ra, String nomeCompleto, String curso, String turno, String email, int telefone) {
+
+    public CadastroDeEstudante() {
+    }
+
+
+    public CadastroDeEstudante(int ra, String nomeCompleto, String curso, String turno, String email, String telefone) {
         this.ra = ra;
         this.nomeCompleto = nomeCompleto;
         this.curso = curso;
@@ -58,12 +63,11 @@ public class CadastroDeEstudante {
         this.email = email;
     }
 
-
-    public int getTelefone() {
+    public String getTelefone() {
         return telefone;
     }
 
-    public void setTelefone(int telefone) {
+    public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
 }

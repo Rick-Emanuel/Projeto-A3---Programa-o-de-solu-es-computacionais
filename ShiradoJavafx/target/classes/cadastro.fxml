@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane fx:id="root" maxHeight="720.0" maxWidth="1080.0" minHeight="720.0" minWidth="1080.0" prefHeight="720.0" prefWidth="1080.0" stylesheets="@login.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shiradojavafx.ControllerCadastroProf">
+    <VBox fx:id="cadastroPane" alignment="CENTER_LEFT" layoutY="51.2" prefHeight="720" prefWidth="1080" spacing="15.0" AnchorPane.bottomAnchor="51.0" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="510.0" AnchorPane.topAnchor="51.0">
+        <Label prefHeight="24.0" prefWidth="503.0" styleClass="label-title" text="Criar nova conta." />
+        <Separator prefWidth="200.0" />
+        <TextField fx:id="nomeField" promptText="Nome completo" />
+        <TextField fx:id="emailField" prefWidth="538.0" promptText="E-mail" />
+        <PasswordField fx:id="senhaField" promptText="Senha" styleClass="password-field" />
+        <PasswordField fx:id="confirmarSenhaField" promptText="Confirmar senha" styleClass="password-field" />
+        <Button alignment="CENTER" onAction="#handleCadastro" prefHeight="36.0" prefWidth="508.0" styleClass="button-login" text="Cadastrar" />
+        <Label fx:id="separadorLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="15.0" prefWidth="506.0" text="Ou" />
+        <Button alignment="CENTER" onAction="#handleVoltarLogin" prefHeight="36.0" prefWidth="518.0" styleClass="button-secondary" text="Voltar ao Login" />
+    </VBox>
+
+    <VBox fx:id="sideInfoPane" alignment="CENTER" prefHeight="720.0" prefWidth="483.0" spacing="20" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <padding>
+            <Insets bottom="20" left="20" right="20" top="20" />
+        </padding>
+        <Label fx:id="sideInfoTitle" text="Cadastro de Professor" />
+        <Label fx:id="sideInfoText" wrapText="true">
+            <text>
+                Crie sua conta para acessar o sistema da universidade. Preencha todos os campos para finalizar seu cadastro.
+            </text>
+        </Label>
+    </VBox>
+</AnchorPane>

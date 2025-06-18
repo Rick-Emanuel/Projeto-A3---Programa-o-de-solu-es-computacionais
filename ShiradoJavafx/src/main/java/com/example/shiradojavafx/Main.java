@@ -13,8 +13,11 @@ public class Main extends Application {
         Database.initialize();
 
         Parent root = FXMLLoader.load(getClass().getResource("/login.fxml"));
+        Scene scene = new Scene(root);
+
         primaryStage.setTitle("Sistema de Cadastro - Login");
-        primaryStage.setScene(new Scene(root, 800, 600));
+        primaryStage.setScene(scene);
+
         primaryStage.setResizable(false);
         primaryStage.show();
     }

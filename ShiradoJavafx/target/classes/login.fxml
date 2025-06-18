@@ -7,34 +7,34 @@
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="root" stylesheets="@login.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shiradojavafx.ControllerLogin">
-    <left>
-        <VBox fx:id="loginPane" alignment="CENTER_LEFT" spacing="15.0" BorderPane.alignment="CENTER">
-            <padding>
-                <Insets bottom="50" left="60" right="60" top="50" />
-            </padding>
-            <Label styleClass="label-title" text="Logue em sua conta." />
-         <Separator prefWidth="200.0" />
-            <TextField fx:id="emailField" promptText="E-mail" />
-            <PasswordField fx:id="senhaField" promptText="Senha" styleClass="password-field" />
-            <HBox spacing="10">
-                <Hyperlink text="Recuperar senha" />
-            </HBox>
-            <Button alignment="CENTER" onAction="#handleLogin" prefHeight="36.0" prefWidth="195.0" styleClass="button-login" text="Login" />
-        </VBox>
-    </left>
-    <right>
-        <VBox fx:id="sideInfoPane" alignment="CENTER" prefHeight="358.0" prefWidth="337.0" spacing="20" BorderPane.alignment="CENTER">
-            <Label fx:id="sideInfoTitle" text="Olá prof!" />
-            <Label fx:id="sideInfoText" wrapText="true">
-                <text>
-                    Bem vindo a área do professor! Insira suas informações de acesso para entrar no portal da universidade.
-                </text>
-            </Label>
-        </VBox>
-    </right>
-</BorderPane>
+<AnchorPane fx:id="root" maxHeight="720.0" maxWidth="1080.0" minHeight="720.0" minWidth="1080.0" prefHeight="720.0" prefWidth="1080.0" stylesheets="@login.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shiradojavafx.ControllerLogin">
+    <VBox fx:id="loginPane" alignment="CENTER_LEFT" layoutX="12.0" layoutY="28.8" maxWidth="1080" minWidth="1080.0" prefHeight="720.0" prefWidth="569.0" spacing="20.0" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="499.0" AnchorPane.topAnchor="29.0">
+        <Label prefHeight="24.0" prefWidth="513.0" styleClass="label-title" text="Logue em sua conta.">
+         <font>
+            <Font size="42.0" />
+         </font></Label>
+        <Separator />
+        <TextField fx:id="emailField" maxWidth="1.7976931348623157E308" promptText="E-mail" />
+        <PasswordField fx:id="senhaField" maxWidth="1.7976931348623157E308" promptText="Senha" styleClass="password-field" />
+        <Hyperlink fx:id="recuperarSenhaLink" onAction="#handleRecuperarSenha" text="Recuperar senha" />
+        <Button maxWidth="1.7976931348623157E308" onAction="#handleLogin" styleClass="button-login" text="Login" />
+        <Label fx:id="sideInfoTitle1" alignment="CENTER" prefHeight="15.0" prefWidth="524.0" text="Ou" />
+        <Button maxWidth="1.7976931348623157E308" onAction="#handleLogin" styleClass="button-login" text="Criar conta" />
+    </VBox>
+
+    <VBox fx:id="sideInfoPane" alignment="CENTER" maxWidth="481.0" minWidth="380.0" prefHeight="720.0" prefWidth="481.0" spacing="25.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <padding>
+            <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
+        </padding>
+        <Label fx:id="sideInfoTitle" text="Olá prof!" />
+        <Label fx:id="sideInfoText" wrapText="true">
+            <text>
+                Bem vindo a área do professor! Insira suas informações de acesso para entrar no portal da universidade.
+            </text>
+        </Label>
+    </VBox>
+</AnchorPane>

@@ -2,6 +2,12 @@
     -fx-background-color: linear-gradient(to right, white 60%, #0d23c3 40%);
     -fx-font-family: 'Segoe UI', sans-serif;
 }
+.root {
+    -fx-min-width: 1080px;
+    -fx-min-height: 720px;
+    -fx-max-width: 1080px;
+    -fx-max-height: 720px;
+}
 
 #loginPane {
     -fx-padding: 50;

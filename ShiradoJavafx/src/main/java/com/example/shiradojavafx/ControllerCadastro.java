@@ -21,6 +21,7 @@ public class ControllerCadastro implements Initializable {
     @FXML private SplitMenuButton cursoSplitMenuButton;
     @FXML private SplitMenuButton turnoSplitMenuButton;
     @FXML private Button enviarButton;
+
     @FXML private TableView<CadastroDeEstudante> alunoTable;
     @FXML private TableColumn<CadastroDeEstudante, String> colNome;
     @FXML private TableColumn<CadastroDeEstudante, String> colEmail;
@@ -32,7 +33,11 @@ public class ControllerCadastro implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        configurarMenus();
+        configurarTabelaSeExistir();
+    }
 
+    private void configurarMenus() {
         cursoSplitMenuButton.getItems().clear();
         String[] cursos = {
                 "Administração",
@@ -57,14 +62,24 @@ public class ControllerCadastro implements Initializable {
 
         cursoSplitMenuButton.setText("Selecione o Curso");
         turnoSplitMenuButton.setText("Selecione o Turno");
+    }
 
-        if (colNome != null) colNome.setCellValueFactory(new PropertyValueFactory<>("nomeCompleto"));
-        if (colEmail != null) colEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
-        if (colRA != null) colRA.setCellValueFactory(new PropertyValueFactory<>("ra"));
-        if (colCurso != null) colCurso.setCellValueFactory(new PropertyValueFactory<>("curso"));
-        if (colTurno != null) colTurno.setCellValueFactory(new PropertyValueFactory<>("turno"));
+    private void configurarTabelaSeExistir() {
+        if (alunoTable != null &&
+                colNome != null &&
+                colEmail != null &&
+                colRA != null &&
+                colCurso != null &&
+                colTurno != null) {
 
-        if (alunoTable != null) alunoTable.setItems(estudantes);
+            colNome.setCellValueFactory(new PropertyValueFactory<>("nomeCompleto"));
+            colEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
+            colRA.setCellValueFactory(new PropertyValueFactory<>("ra"));
+            colCurso.setCellValueFactory(new PropertyValueFactory<>("curso"));
+            colTurno.setCellValueFactory(new PropertyValueFactory<>("turno"));
+
+            alunoTable.setItems(estudantes);
+        }
     }
 
     @FXML
@@ -76,11 +91,12 @@ public class ControllerCadastro implements Initializable {
                 return;
             }
 
-            int ra = Integer.parseInt(raField.getText());
-            if (ra <= 0 || ra >= 100) {
-                showAlert("Erro", "O RA deve ser maior que 0 e menor que 100");
+            String raTexto = raField.getText().trim();
+            if (!raTexto.matches("\\d{10}")) {
+                showAlert("Erro", "O RA deve conter exatamente 10 dígitos numéricos");
                 return;
             }
+            int ra = Integer.parseInt(raTexto);
 
             String curso = cursoSplitMenuButton.getText();
             if (curso.equals("Selecione o Curso")) {
@@ -95,7 +111,7 @@ public class ControllerCadastro implements Initializable {
             }
 
             String email = emailField.getText().trim();
-            int telefone = Integer.parseInt(telefoneField.getText());
+            String telefone = telefoneField.getText().trim();
 
             CadastroDeEstudante novoEstudante = new CadastroDeEstudante(
                     ra,
@@ -108,7 +124,11 @@ public class ControllerCadastro implements Initializable {
 
             try {
                 AlunoDAO.inserirAluno(novoEstudante);
-                estudantes.add(novoEstudante);
+
+                if (alunoTable != null) {
+                    estudantes.add(novoEstudante);
+                }
+
                 limparCampos();
                 showAlert("Sucesso", "Estudante cadastrado com sucesso!");
             } catch (SQLException e) {
@@ -116,9 +136,8 @@ public class ControllerCadastro implements Initializable {
                 e.printStackTrace();
             }
 
-
         } catch (NumberFormatException e) {
-            showAlert("Erro", "RA e Telefone devem ser números válidos");
+            showAlert("Erro", "RA deve ser um número válido");
         }
     }
 

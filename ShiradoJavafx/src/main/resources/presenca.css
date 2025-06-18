@@ -6,7 +6,6 @@ TableView {
     -fx-padding: 2px;
 }
 
-
 .table-column {
     -fx-alignment: CENTER;
 }
@@ -23,7 +22,6 @@ TableView {
     -fx-font-size: 14px;
 }
 
-
 .table-row-cell {
     -fx-cell-size: 40px;
     -fx-border-color: transparent transparent #e2e8f0 transparent;
@@ -35,13 +33,13 @@ TableView {
     -fx-font-size: 14px;
 }
 
-
 .table-row-cell:selected {
     -fx-background-color: #ebf8ff;
     -fx-text-fill: #2b6cb0;
 }
 
-Button {
+
+.button-main {
     -fx-background-color: #4299e1;
     -fx-text-fill: white;
     -fx-font-weight: bold;
@@ -51,10 +49,33 @@ Button {
     -fx-cursor: hand;
 }
 
-Button:hover {
+.button-main:hover {
     -fx-background-color: #3182ce;
 }
 
-Button:pressed {
+.button-main:pressed {
     -fx-background-color: #2b6cb0;
+}
+
+
+.search-button {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-text-fill: #2d3748;
+    -fx-font-size: 16px;
+    -fx-padding: 5px;
+    -fx-cursor: hand;
+}
+
+.search-button:hover {
+    -fx-text-fill: #4299e1;
+}
+
+
+.combo-box {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #cbd5e0;
+    -fx-border-radius: 4px;
+    -fx-padding: 5px;
+    -fx-font-size: 14px;
 }

@@ -11,11 +11,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 public class ControllerListaAlunos implements Initializable {
     @FXML private TableView<CadastroDeEstudante> alunoTable;
@@ -24,12 +26,17 @@ public class ControllerListaAlunos implements Initializable {
     @FXML private TableColumn<CadastroDeEstudante, Integer> colRA;
     @FXML private TableColumn<CadastroDeEstudante, String> colCurso;
     @FXML private TableColumn<CadastroDeEstudante, String> colTurno;
-    @FXML private TableColumn<CadastroDeEstudante, Integer> colTelefone;
+    @FXML private TableColumn<CadastroDeEstudante, String> colTelefone; // Alterado para String
     @FXML private Button voltarButton;
     @FXML private Button atualizarButton;
     @FXML private Label totalAlunosLabel;
+    @FXML private TextField searchField;
+    @FXML private ComboBox<String> filtroCurso;
+    @FXML private ComboBox<String> filtroRA;
+    @FXML private Button deletarButton;
 
     private ObservableList<CadastroDeEstudante> estudantes = FXCollections.observableArrayList();
+    private ObservableList<CadastroDeEstudante> todosEstudantes = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -42,18 +49,39 @@ public class ControllerListaAlunos implements Initializable {
 
         alunoTable.setItems(estudantes);
         carregarDadosDoBanco();
+
+        searchField.textProperty().addListener((observable, oldValue, newValue) -> aplicarFiltros());
+        filtroCurso.setOnAction(e -> aplicarFiltros());
+        filtroRA.setOnAction(e -> aplicarFiltros());
     }
 
     private void carregarDadosDoBanco() {
         try {
             List<CadastroDeEstudante> lista = AlunoDAO.listarTodosAlunos();
-
+            todosEstudantes.setAll(lista);
             estudantes.setAll(lista);
             totalAlunosLabel.setText("Total de alunos: " + lista.size());
+
+            filtroCurso.setItems(FXCollections.observableArrayList(
+                    lista.stream().map(CadastroDeEstudante::getCurso).distinct().collect(Collectors.toList())));
+            filtroRA.setItems(FXCollections.observableArrayList(
+                    lista.stream().map(e -> String.valueOf(e.getRa())).distinct().collect(Collectors.toList())));
+
         } catch (SQLException e) {
             showAlert("Erro ao carregar", "Não foi possível carregar os dados do banco de dados: " + e.getMessage());
-            e.printStackTrace();
         }
+    }
+
+    private void aplicarFiltros() {
+        String nomeFiltro = searchField.getText().toLowerCase();
+        String cursoFiltro = filtroCurso.getValue();
+        String raFiltro = filtroRA.getValue();
+
+        estudantes.setAll(todosEstudantes.stream()
+                .filter(e -> (nomeFiltro.isEmpty() || e.getNomeCompleto().toLowerCase().contains(nomeFiltro)))
+                .filter(e -> (cursoFiltro == null || e.getCurso().equals(cursoFiltro)))
+                .filter(e -> (raFiltro == null || String.valueOf(e.getRa()).equals(raFiltro)))
+                .collect(Collectors.toList()));
     }
 
     @FXML
@@ -74,6 +102,22 @@ public class ControllerListaAlunos implements Initializable {
     void handleAtualizar(ActionEvent event) {
         carregarDadosDoBanco();
         showAlert("Atualizado", "A lista de alunos foi atualizada com sucesso!");
+    }
+
+    @FXML
+    void handleDeletar(ActionEvent event) {
+        CadastroDeEstudante selecionado = alunoTable.getSelectionModel().getSelectedItem();
+        if (selecionado != null) {
+            try {
+                AlunoDAO.deletarAluno(selecionado.getRa());
+                carregarDadosDoBanco();
+                showAlert("Sucesso", "Aluno removido com sucesso.");
+            } catch (SQLException e) {
+                showAlert("Erro", "Não foi possível remover o aluno: " + e.getMessage());
+            }
+        } else {
+            showAlert("Aviso", "Selecione um aluno para excluir.");
+        }
     }
 
     private void showAlert(String title, String message) {
